@@ -38,26 +38,47 @@ function write (text) {
 
 
 
-// Feych API:
+// Fetch API:
 
-// fetch("https://jsonplaceholder.typicode.com/todos")
-//     .then( response => response.json() )
-//     .then( response => response.map( el => write(el.title) ) );
-
-function displayTodos() {
-    return new Promise( () => {
-        setTimeout(() => {
-            loader.classList.remove("active");
-            fetch("https://jsonplaceholder.typicode.com/todos")
-            .then( response => response.json() )
-            .then( response => response.map( el => write(el.title) ) );;
-        }, 1500);
-    });
-}
-    
-async function asyncLoad() {
-loader.classList.add("active");
-await displayTodos();
+function addClass() {
+    loader.classList.add('active');
 }
 
-asyncLoad();
+function displayResults () {
+    addClass();
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then (response => response.json())
+    .then (data => {
+        setTimeout(function(){
+            loader.classList.remove('active');
+            data.map((el => write(el.name)))},
+        1500);
+        }
+    ).catch((error) => {
+        loader.innerHTML = error;
+      });
+}
+button.addEventListener('click', displayResults);
+displayResults();
+
+////////////////////////////
+
+const input = document.getElementById("number");
+const squareButton = document.getElementById("sendNumber");
+const resultBox = document.getElementById("result");
+
+function squareAsync (num) {
+    return new Promise ( (resolve, reject) => {
+        if( num > 0 ){
+            resolve(num*num);
+        } else {
+            reject("the number has to be bigger than 0!");
+        }
+    } )
+}
+
+squareButton.addEventListener("click", () => {squareAsync(Number(input.value))
+    .then( response => resultBox.innerText = response )
+    .catch( error => resultBox.innerText = error )
+} );
+
