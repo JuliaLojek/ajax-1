@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .loader{
+            display: none;
+            padding: 15px 0;
+        }
+        .active{
+            display: block;
+        }
+        .img{
+            display: block;
+        }
+        #imageBox{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>My pictures:</h1>
+        <input type="text" name="address" id="address" placeholder="your image address">
+        <button id="sendImage">display</button>
+        <div id="imageBox">
+        </div>
+        <div class="loader">In progress...</div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
